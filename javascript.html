@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&family=Tilt+Prism&display=swap');
+
+        body {
+            min-height: 100vh;
+            background: url(https://www.imaginefactory.com/wp-content/uploads/2017/04/SPACES_BG-2.jpg);
+            background-size: cover;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :not(:root):fullscreen::backdrop {
+            background: url(https://www.imaginefactory.com/wp-content/uploads/2017/04/SPACES_BG-2.jpg);
+            background-size: cover;
+        }
+
+        .content {
+            width: 60%;
+            height: 300px;
+            background: linear-gradient(red, purple) padding-box,
+                linear-gradient(to right, red, darkorchid) border-box;
+            border-radius: 50em;
+            border: 15px solid transparent;
+            color: #fff;
+            font-size: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Rubik Wet Paint', cursive;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .content:before {
+            content: attr(time);
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(#000, #000) padding-box,
+                linear-gradient(to right, red, darkorchid) border-box;
+            position: absolute;
+            border-radius: 50em;
+            border: 15px solid transparent;
+            z-index: -1;
+            box-shadow: 0 0 20px 1px rgb(255, 255, 255, .3);
+            /* animation: animateTimer 1s linear 5s infinite;
+            transition: 1s all ease; */
+        }
+
+        @keyframes animateTimer {
+            0% {
+                background: linear-gradient(#000, #000) padding-box,
+                    linear-gradient(to right, red, darkorchid) border-box;
+            }
+
+            33% {
+                background: linear-gradient(#000, #000) padding-box,
+                    linear-gradient(to bottom, red, darkorchid) border-box;
+            }
+
+            66% {
+                background: linear-gradient(#000, #000) padding-box,
+                    linear-gradient(to left, red, darkorchid) border-box;
+            }
+
+            100% {
+                background: linear-gradient(#000, #000) padding-box,
+                    linear-gradient(to top, red, darkorchid) border-box;
+            }
+        }
+
+        .timer {
+            transition: 5s all ease;
+        }
+    </style>
+    <div class="content">
+        <div class="timer"></div>
+    </div>
+    <!-- <button onclick="openFullscreen()">fullcreen</button> -->
+    <script>
+        function timer() {
+            let date = new Date();
+            let hours = date.getHours(),
+                minute = date.getMinutes(),
+                second = date.getSeconds();
+            if (second < 10) {
+                second = "0" + second;
+            };
+            if (hours < 10) {
+                hours = "0" + hours;
+            };
+            if (minute < 10) {
+                minute = "0" + minute;
+            };
+
+            document.querySelector(".timer").innerText = hours + ":" + minute + ":" + second;
+        }
+        setInterval(timer, 100);
+        var elem = document.querySelector("body");
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+        }
+        document.body.onkeyup = function (e) {
+            if (e.key == " " ||
+                e.code == "Space" ||
+                e.keyCode == 32
+            ) {
+                openFullscreen();
+            }
+        }
+    </script>
+</body>
+
+</html>
